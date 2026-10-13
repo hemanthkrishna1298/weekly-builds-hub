@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+/*
+  Weekly Builds — token system.
+
+  Paper is cool and slightly grey (not cream); ink is a deep green-black.
+  The single accent is a bottle green, used like a rubber stamp: for the
+  complaint quotes, the primary link, and little else.
+*/
+:root {
+  color-scheme: light dark;
+
+  --paper: #f4f5f2;
+  --paper-raised: #ebede8;
+  --ink: #1a1d1a;
+  --ink-soft: #3b403b;
+  --muted: #5f655e;
+  --rule: #d3d7cf;
+  --rule-strong: #b9bfb4;
+  --stamp: #1e5c47;
+  --stamp-ink: #164a39;
+  --stamp-tint: #dcefe4;
+  --thread: #a9c9b7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121412;
+    --paper-raised: #1a1d1a;
+    --ink: #e6e8e2;
+    --ink-soft: #c5c9c0;
+    --muted: #99a096;
+    --rule: #2a2f2a;
+    --rule-strong: #3b423b;
+    --stamp: #8ecdac;
+    --stamp-ink: #a9dcc1;
+    --stamp-tint: #1b3328;
+    --thread: #2f5a47;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-stamp: var(--stamp);
+  --color-stamp-ink: var(--stamp-ink);
+  --color-stamp-tint: var(--stamp-tint);
+  --color-thread: var(--thread);
+
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+
+  /* Type scale (Elements of Typographic Style-ish, ratio ~1.2 with jumps at display sizes) */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.4;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.5;
+  --text-xl: 1.5rem;
+  --text-xl--line-height: 1.35;
+  --text-2xl: 1.875rem;
+  --text-2xl--line-height: 1.25;
+  --text-3xl: 2.375rem;
+  --text-3xl--line-height: 1.15;
+  --text-4xl: 3rem;
+  --text-4xl--line-height: 1.08;
+  --text-5xl: 3.75rem;
+  --text-5xl--line-height: 1.02;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scrollbar-gutter: stable;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--stamp-tint);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--stamp);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Fraunces optical sizing: let the browser pick the opsz axis from font-size. */
+.font-serif {
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 30;
+}
+
+/* The complaint, in the user's own words. Hanging punctuation on the open quote. */
+.complaint {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  text-wrap: pretty;
+  hanging-punctuation: first;
+}
+
+.complaint::before {
+  content: "\201C";
+  color: var(--stamp);
+}
+
+.complaint::after {
+  content: "\201D";
+  color: var(--stamp);
+}
+
+/* Thread line: the app block hangs off the complaint like a reply in a thread. */
+.reply {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.reply::before {
+  content: "";
+  position: absolute;
+  left: 0.3125rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--thread);
+}
+
+.reply::after {
+  content: "";
+  position: absolute;
+  left: 0.3125rem;
+  top: 1.1rem;
+  width: 0.9rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--thread);
+}
+
+@media (min-width: 48rem) {
+  .reply {
+    padding-left: 2.25rem;
+  }
+  .reply::after {
+    width: 1.25rem;
+  }
+}
+
+/* Prose links: underline that sits low, accent on hover. */
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 120ms ease;
+}
+
+.link:hover {
+  text-decoration-color: var(--stamp);
+}
+
+/* Primary action: stamp-coloured text with a solid rule under it. */
+.action {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  color: var(--stamp-ink);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px solid var(--stamp);
+  padding-bottom: 0.1em;
+  transition:
+    color 120ms ease,
+    border-color 120ms ease;
+}
+
+.action:hover {
+  color: var(--ink);
+}
+
+/* A quiet label chip (tags, source kinds). Sentence case, no shadows. */
+.chip {
+  display: inline-block;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.05rem 0.6rem;
+  white-space: nowrap;
+}
+
+.chip-stamp {
+  color: var(--stamp-ink);
+  border-color: transparent;
+  background: var(--stamp-tint);
+}
+
+/* Small-text running labels (week, date). */
+.note {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  color: var(--muted);
+}
+
+/* Page measure. */
+.measure {
+  max-width: 66ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

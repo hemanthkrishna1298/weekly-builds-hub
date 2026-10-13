@@ -1,0 +1,11 @@
+// Cloudflare Workers config for the hub: a static-assets-only Worker.
+// There is no `main` — Workers serves ./out (the Next.js static export) directly.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "weekly-builds",
+  "compatibility_date": "2026-10-13",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}

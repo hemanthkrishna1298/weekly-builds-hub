@@ -1,0 +1,16 @@
+{
+  "$schema": "./apps.schema.json",
+  "hub": {
+    "name": "Weekly Builds",
+    "tagline": "One real problem, one quality app, every week.",
+    "description": "Each week I mine the internet for a pain point people keep complaining about, build a proper app that solves it, and ship it here. Free to use. Source on GitHub.",
+    "url": "https://weekly-builds.hemantha.workers.dev",
+    "github": "https://github.com/hemanthkrishna1298/weekly-builds-hub",
+    "author": {
+      "name": "Hemantha",
+      "url": "https://github.com/hemanthkrishna1298"
+    },
+    "issuesUrl": "https://github.com/hemanthkrishna1298/weekly-builds-hub/issues/new"
+  },
+  "apps": []
+}

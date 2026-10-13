@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#1e5c47"/>
+  <!-- a closing quotation mark: two commas, the stamp of the hub -->
+  <path fill="#f4f5f2" d="M8.5 9.5h6v6.2c0 3.6-1.9 6-5.5 7.1l-.9-2.1c2.1-.7 3.2-2 3.4-3.8H8.5z"/>
+  <path fill="#f4f5f2" d="M17.5 9.5h6v6.2c0 3.6-1.9 6-5.5 7.1l-.9-2.1c2.1-.7 3.2-2 3.4-3.8h-3z"/>
+</svg>
